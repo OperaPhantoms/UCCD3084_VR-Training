@@ -1952,6 +1952,8 @@ GameObject:
   - component: {fileID: 243225252}
   - component: {fileID: 243225251}
   - component: {fileID: 243225250}
+  - component: {fileID: 243225255}
+  - component: {fileID: 243225254}
   m_Layer: 0
   m_Name: RightRay
   m_TagString: Untagged
@@ -2420,7 +2422,7 @@ MonoBehaviour:
       m_Name: Is Tracked
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 2eb8b505-f475-4902-8d28-f7dfc0de2a83
+      m_Id: ece6235d-1d24-473b-ac7f-4deea6f937b2
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2523,7 +2525,7 @@ MonoBehaviour:
       m_Name: UI Scroll
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 648f428c-5d3f-4b4a-9915-f06f0ff9c7c0
+      m_Id: 828a8b22-d418-451c-ace7-92975634c05c
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2561,7 +2563,7 @@ MonoBehaviour:
       m_Name: Directional Anchor Rotation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 92f2b137-e058-44fb-89ba-a23f39fdac0a
+      m_Id: 04b8621a-b4a0-4f85-abe9-87d95568bbcd
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2586,7 +2588,7 @@ MonoBehaviour:
       m_Name: Scale Toggle
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 52cfacb2-fe13-4cea-8ca7-6d4454c1f935
+      m_Id: df6eb9f2-d08c-486f-8a1d-6075cdedddad
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2598,13 +2600,41 @@ MonoBehaviour:
       m_Name: Scale Delta
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 39bfb603-fe40-4860-9685-47e204e4ac60
+      m_Id: 8ec96f15-eaae-48a2-b2ac-03d804b12207
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &243225254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243225247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf14522d53cc1594991c164e785780dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceToggle: 0
+  directInteractor: {fileID: 757571200}
+--- !u!114 &243225255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243225247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56684aba41be06468cf3931aa42d7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    m_Bits: 4294967293
 --- !u!1 &259193821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,8 +2808,8 @@ Canvas:
   m_GameObject: {fileID: 263574719}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 1526632236}
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5337,6 +5367,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508631373}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!134 &523988865
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1 &531403572 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6150933721197494150, guid: 97e89670ed7696d489d6ddba4543a01b,
@@ -6490,6 +6532,7 @@ GameObject:
   - component: {fileID: 757571200}
   - component: {fileID: 757571201}
   - component: {fileID: 757571202}
+  - component: {fileID: 757571204}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -6609,7 +6652,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757571198}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 523988865}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6703,7 +6746,7 @@ MonoBehaviour:
       m_Name: Is Tracked
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 524adfd5-eddd-48a7-be19-ba764ae47f92
+      m_Id: 84bf1ae3-61ae-48f2-a97b-42c7a33dfe03
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -6806,7 +6849,7 @@ MonoBehaviour:
       m_Name: UI Scroll
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: abdd5d5c-2301-431a-b8f4-deed6213f347
+      m_Id: 7b580b90-6c38-4ab5-b221-2ed3fe75aed9
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -6844,7 +6887,7 @@ MonoBehaviour:
       m_Name: Directional Anchor Rotation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 8cfa4a36-e519-4215-9276-36aaa77aea61
+      m_Id: f74c3d5d-8481-45ef-a6be-6023ed4ab6e7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -6869,7 +6912,7 @@ MonoBehaviour:
       m_Name: Scale Toggle
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 184c4db9-3ee6-40f8-bf9e-60a531369b23
+      m_Id: 027027cf-1d34-47e5-bd20-16135d0af10b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -6881,13 +6924,27 @@ MonoBehaviour:
       m_Name: Scale Delta
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 3b9a41f6-4d6f-4066-8911-bc0e9a85df30
+      m_Id: da299a3d-0c69-413f-898f-0711b511d96e
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &757571204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757571198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56684aba41be06468cf3931aa42d7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    m_Bits: 4294967293
 --- !u!1 &758957539
 GameObject:
   m_ObjectHideFlags: 0
@@ -7149,7 +7206,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 51
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -9773,6 +9830,7 @@ GameObject:
   - component: {fileID: 1333979361}
   - component: {fileID: 1333979362}
   - component: {fileID: 1333979363}
+  - component: {fileID: 1333979365}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -9892,7 +9950,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333979359}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 1549854082}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9986,7 +10044,7 @@ MonoBehaviour:
       m_Name: Is Tracked
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: e4d0d7cb-5134-4fba-a1c7-1cb9484a30a4
+      m_Id: aaac3adf-0858-4de7-9efb-5375c26566a0
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -10089,7 +10147,7 @@ MonoBehaviour:
       m_Name: UI Scroll
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 6ad9d4d8-f0ca-40ae-9aa1-80a1f01417c5
+      m_Id: 5eb61e44-3567-4561-85db-f4f334fe2f6f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -10127,7 +10185,7 @@ MonoBehaviour:
       m_Name: Directional Anchor Rotation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: cedc9d42-cb31-4bf8-bbee-038b915cb4d0
+      m_Id: 74084ca1-978b-4d9b-b1ba-072026f85361
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -10152,7 +10210,7 @@ MonoBehaviour:
       m_Name: Scale Toggle
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 8b381dd2-2701-45d4-a130-e080becfcf62
+      m_Id: ce722615-527f-441b-a569-bce1c4ea132d
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -10164,13 +10222,27 @@ MonoBehaviour:
       m_Name: Scale Delta
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: aaad17de-32c0-4c45-b953-e38a4492ffa3
+      m_Id: 8f777472-bb8f-4355-bd02-10086179d1e7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &1333979365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333979359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56684aba41be06468cf3931aa42d7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    m_Bits: 4294967293
 --- !u!1 &1349093509
 GameObject:
   m_ObjectHideFlags: 0
@@ -11389,7 +11461,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 66628781}
+      - m_Target: {fileID: 1963046883}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 0
@@ -11453,6 +11525,78 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 243225255}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetOriginalLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1719633274}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetOriginalLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 757571204}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetOriginalLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1333979365}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetOriginalLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 243225254}
+        m_TargetAssemblyTypeName: ToggleRay, Assembly-CSharp
+        m_MethodName: DeactivateRay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1719633273}
+        m_TargetAssemblyTypeName: ToggleRay, Assembly-CSharp
+        m_MethodName: DeactivateRay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11671,7 +11815,7 @@ MonoBehaviour:
       m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: b9cda657-daab-4504-962b-b78fa5723224
+      m_Id: c4d34d29-b948-49e5-a58b-325cb5c1a507
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -11860,6 +12004,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!134 &1549854082
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1 &1618447873
 GameObject:
   m_ObjectHideFlags: 0
@@ -12745,6 +12901,8 @@ GameObject:
   - component: {fileID: 1719633271}
   - component: {fileID: 1719633270}
   - component: {fileID: 1719633269}
+  - component: {fileID: 1719633274}
+  - component: {fileID: 1719633273}
   m_Layer: 0
   m_Name: LeftRay
   m_TagString: Untagged
@@ -13213,7 +13371,7 @@ MonoBehaviour:
       m_Name: Is Tracked
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 9b486985-0e21-4f39-82d8-1760af6eebd6
+      m_Id: 7a9934c4-afad-4e00-8e6e-df64cca4e2a4
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -13316,7 +13474,7 @@ MonoBehaviour:
       m_Name: UI Scroll
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: aa9d6408-debe-4daa-b53f-7facfae2633b
+      m_Id: a7ff007c-bdc6-433d-afb1-e85c5d849970
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -13354,7 +13512,7 @@ MonoBehaviour:
       m_Name: Directional Anchor Rotation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: e3685c3a-f48c-48d5-aae9-01e66f75d375
+      m_Id: b4b3300d-c33f-4780-bc93-c87f2a995f11
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -13379,7 +13537,7 @@ MonoBehaviour:
       m_Name: Scale Toggle
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 188977ed-adf6-40d5-a5f6-bf2ce3e94c90
+      m_Id: b8dc1e11-0fa1-4a7d-99a8-dcf5825a0642
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -13391,13 +13549,41 @@ MonoBehaviour:
       m_Name: Scale Delta
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 0929689d-d18c-4a67-847f-d584b441610b
+      m_Id: e2f54d11-adcc-435b-9a32-357e493234e2
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &1719633273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719633266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf14522d53cc1594991c164e785780dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceToggle: 0
+  directInteractor: {fileID: 1333979361}
+--- !u!114 &1719633274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719633266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56684aba41be06468cf3931aa42d7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    m_Bits: 4294967293
 --- !u!1001 &1736349558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14706,6 +14892,78 @@ MonoBehaviour:
       - m_Target: {fileID: 263574720}
         m_TargetAssemblyTypeName: FadeCanvas, Assembly-CSharp
         m_MethodName: StartFadeOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 243225255}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetTargetLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1719633274}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetTargetLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 757571204}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetTargetLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1333979365}
+        m_TargetAssemblyTypeName: SetInteractionLayer, Assembly-CSharp
+        m_MethodName: SetTargetLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 243225254}
+        m_TargetAssemblyTypeName: ToggleRay, Assembly-CSharp
+        m_MethodName: ActivateRay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1719633273}
+        m_TargetAssemblyTypeName: ToggleRay, Assembly-CSharp
+        m_MethodName: ActivateRay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21114,7 +21372,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -21248,7 +21506,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -21502,7 +21760,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -21636,7 +21894,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -23572,7 +23830,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -23732,7 +23990,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -24565,7 +24823,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
