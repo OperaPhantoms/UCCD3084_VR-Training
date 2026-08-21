@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /// <summary>
 /// Move an object using velocity
@@ -34,19 +34,24 @@ public class MoveWithVelocity : MonoBehaviour
         rigidBody.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
+    [Header("Invert Controls (Check if reversed)")]
+    public bool invertX = false;
+    public bool invertY = false;
+    public bool invertZ = false;
+
     public void SetRightVelocity(float value)
     {
-        inputVelocity.x = value;
+        inputVelocity.x = invertX ? -value : value;
     }
 
     public void SetForwardVelocity(float value)
     {
-        inputVelocity.z = value;
+        inputVelocity.z = invertZ ? -value : value;
     }
 
     public void SetUpVelocity(float value)
     {
-        inputVelocity.y = value;
+        inputVelocity.y = invertY ? -value : value;
     }
 
     private void OnValidate()
