@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -37,9 +38,12 @@ public class CraneController : MonoBehaviour
     public GameObject boxPrefab;
     [Tooltip("Where new boxes should be dropped from.")]
     public Transform boxSpawnPoint;
+    [Tooltip("Parent of the boxes that are already placed in the scene at start (not crane-spawned). Their positions get restored on Reset.")]
+    public Transform originalBoxesRoot;
     public float dumpInterval = 0.5f;
     private bool isDumping = false;
     private float dumpTimer = 0f;
+    private readonly List<GameObject> spawnedBoxes = new List<GameObject>();
 
     [Header("Console Adjustment")]
     public float consoleMoveSpeed = 0.5f;
@@ -51,6 +55,35 @@ public class CraneController : MonoBehaviour
     private float trolleyInput = 0f;
     private float hoistInput = 0f;
     private float targetRotationAngle = 0f;
+
+    // Starting state, cached once so Reset can return everything without reloading the scene
+    private Vector3 consoleStartPosition;
+    private Vector3 gantryStartLocalPos;
+    private Vector3 trolleyStartLocalPos;
+    private Vector3 hoistStartLocalPos;
+    private Quaternion magnetStartLocalRot;
+    private readonly List<Transform> originalBoxes = new List<Transform>();
+    private readonly List<Vector3> originalBoxStartPositions = new List<Vector3>();
+    private readonly List<Quaternion> originalBoxStartRotations = new List<Quaternion>();
+
+    private void Start()
+    {
+        consoleStartPosition = transform.position;
+        if (gantry != null) gantryStartLocalPos = gantry.localPosition;
+        if (trolley != null) trolleyStartLocalPos = trolley.localPosition;
+        if (hoist != null) hoistStartLocalPos = hoist.localPosition;
+        if (magnet != null) magnetStartLocalRot = magnet.localRotation;
+
+        if (originalBoxesRoot != null)
+        {
+            foreach (Transform box in originalBoxesRoot)
+            {
+                originalBoxes.Add(box);
+                originalBoxStartPositions.Add(box.position);
+                originalBoxStartRotations.Add(box.rotation);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -182,14 +215,15 @@ public class CraneController : MonoBehaviour
     }
 
     // Called by Clear Boxes Button (Select Enter Event)
+    // Only removes boxes the crane has dumped - the boxes placed in the scene at start are left alone.
     public void ClearBoxes()
     {
-        GameObject[] boxes = GameObject.FindGameObjectsWithTag("Box");
-        foreach (GameObject box in boxes)
+        foreach (GameObject box in spawnedBoxes)
         {
-            Destroy(box);
+            if (box != null) Destroy(box);
         }
-        Debug.Log("CraneController: All boxes cleared.");
+        spawnedBoxes.Clear();
+        Debug.Log("CraneController: Crane-spawned boxes cleared.");
     }
 
     // Called by Dump Boxes Button (Hover Enter -> true, Hover Exit -> false)
@@ -203,11 +237,83 @@ public class CraneController : MonoBehaviour
     {
         if (boxPrefab != null && boxSpawnPoint != null)
         {
-            Instantiate(boxPrefab, boxSpawnPoint.position, Random.rotation);
+            GameObject box = Instantiate(boxPrefab, boxSpawnPoint.position, Random.rotation);
+            spawnedBoxes.Add(box);
         }
         else
         {
             Debug.LogWarning("CraneController: Cannot dump boxes because Box Prefab or Spawn Point is missing!");
         }
+    }
+
+    // Called by the Reset button. Returns the crane, magnet and boxes to how they were
+    // at the start of the session, without reloading the scene.
+    public void ResetCrane()
+    {
+        gantryInput = 0f;
+        trolleyInput = 0f;
+        hoistInput = 0f;
+        targetRotationAngle = 0f;
+        isDumping = false;
+        isConsoleMovingUp = false;
+        isConsoleMovingDown = false;
+        dumpTimer = 0f;
+
+        transform.position = consoleStartPosition;
+
+        ResetPart(gantry, gantryStartLocalPos);
+        ResetPart(trolley, trolleyStartLocalPos);
+        ResetPart(hoist, hoistStartLocalPos);
+
+        if (magnet != null)
+        {
+            Rigidbody magnetRb = magnet.GetComponent<Rigidbody>();
+            if (magnetRb != null)
+            {
+                magnetRb.velocity = Vector3.zero;
+                magnetRb.angularVelocity = Vector3.zero;
+            }
+            magnet.localRotation = magnetStartLocalRot;
+        }
+
+        for (int i = 0; i < originalBoxes.Count; i++)
+        {
+            Transform box = originalBoxes[i];
+            if (box == null) continue; // may have been destroyed via the magnet or another interaction
+
+            Rigidbody boxRb = box.GetComponent<Rigidbody>();
+            if (boxRb != null)
+            {
+                // Briefly go kinematic so the physics engine doesn't try to resolve any
+                // overlap at the old spot before the teleport takes effect.
+                boxRb.velocity = Vector3.zero;
+                boxRb.angularVelocity = Vector3.zero;
+                boxRb.isKinematic = true;
+            }
+
+            box.position = originalBoxStartPositions[i];
+            box.rotation = originalBoxStartRotations[i];
+            box.gameObject.SetActive(true);
+
+            if (boxRb != null)
+            {
+                boxRb.isKinematic = false;
+            }
+        }
+
+        ClearBoxes();
+    }
+
+    private void ResetPart(Transform part, Vector3 startLocalPos)
+    {
+        if (part == null) return;
+
+        Rigidbody rb = part.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        part.localPosition = startLocalPos;
     }
 }
