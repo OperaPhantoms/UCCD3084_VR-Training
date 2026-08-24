@@ -5053,6 +5053,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357852690}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &376147126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3089637589721827147, guid: afe23f383b605cd40a808d39f3e8ff24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1307241875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3314355762833564a974838fd1466d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &382035876
 GameObject:
   m_ObjectHideFlags: 0
@@ -14231,6 +14243,7 @@ MonoBehaviour:
   boxPrefab: {fileID: 6150933721197494150, guid: 97e89670ed7696d489d6ddba4543a01b,
     type: 3}
   boxSpawnPoint: {fileID: 1675701232}
+  originalBoxesRoot: {fileID: 77525555}
   dumpInterval: 0.5
   consoleMoveSpeed: 0.5
 --- !u!1001 &858508317
@@ -18152,9 +18165,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8811150481684482044, guid: afe23f383b605cd40a808d39f3e8ff24,
         type: 3}
+      propertyPath: magnetFeedback
+      value: 
+      objectReference: {fileID: 2093529276241526591}
+    - target: {fileID: 8811150481684482044, guid: afe23f383b605cd40a808d39f3e8ff24,
+        type: 3}
+      propertyPath: craneController
+      value: 
+      objectReference: {fileID: 842918410}
+    - target: {fileID: 8811150481684482044, guid: afe23f383b605cd40a808d39f3e8ff24,
+        type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1526632237}
+    - target: {fileID: 8811150481684482044, guid: afe23f383b605cd40a808d39f3e8ff24,
+        type: 3}
+      propertyPath: progressTracker
+      value: 
+      objectReference: {fileID: 376147126}
     - target: {fileID: 9141140988494219009, guid: afe23f383b605cd40a808d39f3e8ff24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

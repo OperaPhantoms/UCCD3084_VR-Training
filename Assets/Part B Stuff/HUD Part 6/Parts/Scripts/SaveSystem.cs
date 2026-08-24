@@ -11,6 +11,15 @@ public class SaveSystem : MonoBehaviour
 {
     public Transform playerTransform;
     public string saveFileName = "saveData.json";
+
+    [Header("Reset Targets")]
+    [Tooltip("Resets the elapsed session timer.")]
+    public ProgressTracker progressTracker;
+    [Tooltip("Resets the crane, magnet position and boxes.")]
+    public CraneController craneController;
+    [Tooltip("Turns the magnet visuals back to its inactive state.")]
+    public MagnetVisualFeedback magnetFeedback;
+
     private string saveFilePath;
     private static bool loadOnStart = false;
     private VolumeController volumeController;
@@ -72,9 +81,32 @@ public class SaveSystem : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Returns the training scenario to its starting state without reloading the scene.
+    // Player position and audio/comfort preferences are left as the trainee has them set.
     public void ResetScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (hudManager != null)
+        {
+            hudManager.SetScore(0);
+        }
+
+        if (progressTracker != null)
+        {
+            progressTracker.ResetTimer();
+        }
+
+        if (craneController != null)
+        {
+            craneController.ResetCrane();
+        }
+
+        if (magnetFeedback != null)
+        {
+            magnetFeedback.SetMagnetActiveState(false);
+            magnetFeedback.OnBoxReleased();
+        }
+
+        Debug.Log("Training scenario reset to its starting state.");
     }
 
     public void QuitGame()

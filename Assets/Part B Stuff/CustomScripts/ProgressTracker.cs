@@ -35,4 +35,16 @@ public class ProgressTracker : MonoBehaviour
     {
         isTracking = false;
     }
+
+    // Call this to return the timer to its starting state without reloading the scene.
+    public void ResetTimer()
+    {
+        elapsedTime = 0f;
+        isTracking = true;
+
+        if (timeText != null)
+        {
+            timeText.text = "Time: 00:00";
+        }
+    }
 }
