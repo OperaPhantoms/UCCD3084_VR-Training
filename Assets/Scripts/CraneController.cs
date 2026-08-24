@@ -250,20 +250,82 @@ public class CraneController : MonoBehaviour
     // at the start of the session, without reloading the scene.
     public void ResetCrane()
     {
+        ApplyState(BuildStartState());
+    }
+
+    // Full physical state of the crane, its boxes, and any crane-spawned boxes.
+    // Serializable so SaveSystem can persist it as part of GameState.
+    [System.Serializable]
+    public struct CraneState
+    {
+        public Vector3 consolePosition;
+        public Vector3 gantryLocalPos;
+        public Vector3 trolleyLocalPos;
+        public Vector3 hoistLocalPos;
+        public Quaternion magnetLocalRot;
+        public Vector3[] boxPositions;
+        public Quaternion[] boxRotations;
+        public bool[] boxActive;
+        public Vector3[] spawnedBoxPositions;
+        public Quaternion[] spawnedBoxRotations;
+    }
+
+    // Captures the crane's current physical state for saving.
+    public CraneState CaptureState()
+    {
+        CraneState state = new CraneState
+        {
+            consolePosition = transform.position,
+            gantryLocalPos = gantry != null ? gantry.localPosition : Vector3.zero,
+            trolleyLocalPos = trolley != null ? trolley.localPosition : Vector3.zero,
+            hoistLocalPos = hoist != null ? hoist.localPosition : Vector3.zero,
+            magnetLocalRot = magnet != null ? magnet.localRotation : Quaternion.identity,
+            boxPositions = new Vector3[originalBoxes.Count],
+            boxRotations = new Quaternion[originalBoxes.Count],
+            boxActive = new bool[originalBoxes.Count],
+            spawnedBoxPositions = new Vector3[spawnedBoxes.Count],
+            spawnedBoxRotations = new Quaternion[spawnedBoxes.Count]
+        };
+
+        for (int i = 0; i < originalBoxes.Count; i++)
+        {
+            Transform box = originalBoxes[i];
+            if (box == null) continue; // destroyed via the magnet or another interaction
+
+            state.boxPositions[i] = box.position;
+            state.boxRotations[i] = box.rotation;
+            state.boxActive[i] = box.gameObject.activeSelf;
+        }
+
+        for (int i = 0; i < spawnedBoxes.Count; i++)
+        {
+            GameObject box = spawnedBoxes[i];
+            if (box == null) continue;
+
+            state.spawnedBoxPositions[i] = box.transform.position;
+            state.spawnedBoxRotations[i] = box.transform.rotation;
+        }
+
+        return state;
+    }
+
+    // Applies a previously captured (or start-of-session) crane state without reloading the scene.
+    public void ApplyState(CraneState state)
+    {
         gantryInput = 0f;
         trolleyInput = 0f;
         hoistInput = 0f;
-        targetRotationAngle = 0f;
         isDumping = false;
         isConsoleMovingUp = false;
         isConsoleMovingDown = false;
         dumpTimer = 0f;
+        targetRotationAngle = state.magnetLocalRot.eulerAngles.y;
 
-        transform.position = consoleStartPosition;
+        transform.position = state.consolePosition;
 
-        ResetPart(gantry, gantryStartLocalPos);
-        ResetPart(trolley, trolleyStartLocalPos);
-        ResetPart(hoist, hoistStartLocalPos);
+        ResetPart(gantry, state.gantryLocalPos);
+        ResetPart(trolley, state.trolleyLocalPos);
+        ResetPart(hoist, state.hoistLocalPos);
 
         if (magnet != null)
         {
@@ -273,13 +335,17 @@ public class CraneController : MonoBehaviour
                 magnetRb.velocity = Vector3.zero;
                 magnetRb.angularVelocity = Vector3.zero;
             }
-            magnet.localRotation = magnetStartLocalRot;
+            magnet.localRotation = state.magnetLocalRot;
         }
 
-        for (int i = 0; i < originalBoxes.Count; i++)
+        int boxCount = state.boxPositions != null ? state.boxPositions.Length : 0;
+        for (int i = 0; i < originalBoxes.Count && i < boxCount; i++)
         {
             Transform box = originalBoxes[i];
             if (box == null) continue; // may have been destroyed via the magnet or another interaction
+
+            box.gameObject.SetActive(state.boxActive[i]);
+            if (!state.boxActive[i]) continue;
 
             Rigidbody boxRb = box.GetComponent<Rigidbody>();
             if (boxRb != null)
@@ -291,9 +357,8 @@ public class CraneController : MonoBehaviour
                 boxRb.isKinematic = true;
             }
 
-            box.position = originalBoxStartPositions[i];
-            box.rotation = originalBoxStartRotations[i];
-            box.gameObject.SetActive(true);
+            box.position = state.boxPositions[i];
+            box.rotation = state.boxRotations[i];
 
             if (boxRb != null)
             {
@@ -302,6 +367,39 @@ public class CraneController : MonoBehaviour
         }
 
         ClearBoxes();
+
+        if (boxPrefab != null && state.spawnedBoxPositions != null)
+        {
+            for (int i = 0; i < state.spawnedBoxPositions.Length; i++)
+            {
+                GameObject box = Instantiate(boxPrefab, state.spawnedBoxPositions[i], state.spawnedBoxRotations[i]);
+                spawnedBoxes.Add(box);
+            }
+        }
+    }
+
+    private CraneState BuildStartState()
+    {
+        CraneState state = new CraneState
+        {
+            consolePosition = consoleStartPosition,
+            gantryLocalPos = gantryStartLocalPos,
+            trolleyLocalPos = trolleyStartLocalPos,
+            hoistLocalPos = hoistStartLocalPos,
+            magnetLocalRot = magnetStartLocalRot,
+            boxPositions = originalBoxStartPositions.ToArray(),
+            boxRotations = originalBoxStartRotations.ToArray(),
+            boxActive = new bool[originalBoxes.Count],
+            spawnedBoxPositions = new Vector3[0],
+            spawnedBoxRotations = new Quaternion[0]
+        };
+
+        for (int i = 0; i < state.boxActive.Length; i++)
+        {
+            state.boxActive[i] = true;
+        }
+
+        return state;
     }
 
     private void ResetPart(Transform part, Vector3 startLocalPos)

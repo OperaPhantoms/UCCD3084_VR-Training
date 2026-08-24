@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.IO;
-using UnityEngine.SceneManagement;
 
 using UnityEditor;
 
@@ -21,7 +20,6 @@ public class SaveSystem : MonoBehaviour
     public MagnetVisualFeedback magnetFeedback;
 
     private string saveFilePath;
-    private static bool loadOnStart = false;
     private VolumeController volumeController;
     private HUDManager hudManager;
 
@@ -35,15 +33,6 @@ public class SaveSystem : MonoBehaviour
 
         if (playerTransform == null && Camera.main != null)
             playerTransform = Camera.main.transform;
-    }
-
-    private void Start()
-    {
-        if (loadOnStart)
-        {
-            LoadGameData();
-            loadOnStart = false;
-        }
     }
 
     public void SaveGame()
@@ -70,6 +59,12 @@ public class SaveSystem : MonoBehaviour
             state.score = hudManager.GetScore();
         }
 
+        // Save crane, magnet and box positions
+        if (craneController != null)
+        {
+            state.craneState = craneController.CaptureState();
+        }
+
         string json = JsonUtility.ToJson(state, true);
         File.WriteAllText(saveFilePath, json);
         Debug.Log($"Game saved to {saveFilePath}");
@@ -77,8 +72,7 @@ public class SaveSystem : MonoBehaviour
 
     public void LoadGame()
     {
-        loadOnStart = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadGameData();
     }
 
     // Returns the training scenario to its starting state without reloading the scene.
@@ -149,6 +143,11 @@ public class SaveSystem : MonoBehaviour
             hudManager.SetScore(state.score);
         }
 
+        if (craneController != null)
+        {
+            craneController.ApplyState(state.craneState);
+        }
+
         Debug.Log("Game loaded.");
     }
 
@@ -159,5 +158,6 @@ public class SaveSystem : MonoBehaviour
         public float bgmVolume;
         public float sfxVolume;
         public int score;
+        public CraneController.CraneState craneState;
     }
 }
