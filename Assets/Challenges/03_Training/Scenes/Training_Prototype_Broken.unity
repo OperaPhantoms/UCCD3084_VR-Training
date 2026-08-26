@@ -3641,7 +3641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967293
+    m_Bits: 4294967294
 --- !u!114 &243225256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6577,18 +6577,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 512050731}
   m_PrefabAsset: {fileID: 0}
---- !u!134 &523988865
-PhysicMaterial:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  dynamicFriction: 0.6
-  staticFriction: 0.6
-  bounciness: 0
-  frictionCombine: 0
-  bounceCombine: 0
 --- !u!1 &531403572 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6150933721197494150, guid: 97e89670ed7696d489d6ddba4543a01b,
@@ -13208,7 +13196,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757571198}
-  m_Material: {fileID: 523988865}
+  m_Material: {fileID: 1397438451}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -13500,7 +13488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967293
+    m_Bits: 4294967294
 --- !u!1 &758957539
 GameObject:
   m_ObjectHideFlags: 0
@@ -29022,7 +29010,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333979359}
-  m_Material: {fileID: 1549854082}
+  m_Material: {fileID: 2052178983}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -29314,7 +29302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967293
+    m_Bits: 4294967294
 --- !u!1 &1349093509
 GameObject:
   m_ObjectHideFlags: 0
@@ -29880,6 +29868,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1307241875}
   m_PrefabAsset: {fileID: 0}
+--- !u!134 &1397438451
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ' (Instance)'
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1001 &1401617829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31726,18 +31726,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!134 &1549854082
-PhysicMaterial:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  dynamicFriction: 0.6
-  staticFriction: 0.6
-  bounciness: 0
-  frictionCombine: 0
-  bounceCombine: 0
 --- !u!1 &1574922711
 GameObject:
   m_ObjectHideFlags: 0
@@ -38324,7 +38312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967293
+    m_Bits: 4294967294
 --- !u!114 &1719633275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50895,6 +50883,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044412756}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!134 &2052178983
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ' (Instance)'
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1001 &2068796043
 PrefabInstance:
   m_ObjectHideFlags: 0
