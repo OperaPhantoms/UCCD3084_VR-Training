@@ -36,6 +36,25 @@ public class ProgressTracker : MonoBehaviour
         isTracking = false;
     }
 
+    // For saving/loading the timer's progress
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
+
+    public void SetElapsedTime(float time)
+    {
+        elapsedTime = time;
+        isTracking = true;
+
+        if (timeText != null)
+        {
+            int minutes = Mathf.FloorToInt(elapsedTime / 60F);
+            int seconds = Mathf.FloorToInt(elapsedTime - minutes * 60);
+            timeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
+        }
+    }
+
     // Call this to return the timer to its starting state without reloading the scene.
     public void ResetTimer()
     {

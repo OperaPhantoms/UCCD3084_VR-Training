@@ -59,6 +59,12 @@ public class SaveSystem : MonoBehaviour
             state.score = hudManager.GetScore();
         }
 
+        // Save elapsed session time
+        if (progressTracker != null)
+        {
+            state.elapsedTime = progressTracker.GetElapsedTime();
+        }
+
         // Save crane, magnet and box positions
         if (craneController != null)
         {
@@ -143,6 +149,11 @@ public class SaveSystem : MonoBehaviour
             hudManager.SetScore(state.score);
         }
 
+        if (progressTracker != null)
+        {
+            progressTracker.SetElapsedTime(state.elapsedTime);
+        }
+
         if (craneController != null)
         {
             craneController.ApplyState(state.craneState);
@@ -158,6 +169,7 @@ public class SaveSystem : MonoBehaviour
         public float bgmVolume;
         public float sfxVolume;
         public int score;
+        public float elapsedTime;
         public CraneController.CraneState craneState;
     }
 }
