@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+//Made with Claude's help.
 public class CraneController : MonoBehaviour
 {
     [Header("Crane Mechanical Parts")]
