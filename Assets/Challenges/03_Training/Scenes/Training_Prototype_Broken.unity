@@ -3641,7 +3641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967294
+    m_Bits: 4294967292
 --- !u!114 &243225256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13488,7 +13488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967294
+    m_Bits: 4294967292
 --- !u!1 &758957539
 GameObject:
   m_ObjectHideFlags: 0
@@ -29302,7 +29302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967294
+    m_Bits: 4294967292
 --- !u!1 &1349093509
 GameObject:
   m_ObjectHideFlags: 0
@@ -38312,7 +38312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
-    m_Bits: 4294967294
+    m_Bits: 4294967292
 --- !u!114 &1719633275
 MonoBehaviour:
   m_ObjectHideFlags: 0
