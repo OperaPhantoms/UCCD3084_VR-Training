@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// Handles the visual feedback for the Magnet (Part A Item 6).
 /// Changes color when active/inactive, and plays particles when actively lifting a box.
 /// </summary>
+// Made with AI assistance.
 public class MagnetVisualFeedback : MonoBehaviour
 {
     [Header("Visual State (Color Change)")]
